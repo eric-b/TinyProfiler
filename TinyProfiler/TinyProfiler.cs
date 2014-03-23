@@ -72,6 +72,11 @@ namespace TinyProfiler
 
         public static IProfiler Instance { get { return _instance; } }
 
+        private EmptyProfiler()
+        {
+
+        }
+
         public IProfiler StartStep(string name)
         {
             return this;

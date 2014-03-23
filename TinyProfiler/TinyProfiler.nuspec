@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
+    <id>TinyProfiler</id>
+    <version>1.0.0.2</version>
+    <title>TinyProfiler</title>
     <authors>Eric Boumendil</authors>
     <owners>Eric Boumendil</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/eric-b/TinyProfiler</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Measure execution time by regions of code</description>
     <releaseNotes/>
     <copyright>Copyright 2014</copyright>
     <tags>profiler execution time timing profiling</tags>
