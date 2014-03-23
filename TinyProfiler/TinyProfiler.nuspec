@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Eric Boumendil</authors>
+    <owners>Eric Boumendil</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes/>
+    <copyright>Copyright 2014</copyright>
+    <tags>profiler execution time timing profiling</tags>
+  </metadata>
+  <files>
+    <file src="TinyProfiler.cs" target="content\net35\TinyProfiler" />
+    <file src="TinyProfiler.cs" target="content\net40\TinyProfiler" />
+  </files>
+</package>
