@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TinyProfiler</id>
-    <version>1.0.0.2</version>
+    <version>1.0.1.0</version>
     <title>TinyProfiler</title>
     <authors>Eric Boumendil</authors>
     <owners>Eric Boumendil</owners>
@@ -15,7 +15,8 @@
     <tags>profiler execution time timing profiling</tags>
   </metadata>
   <files>
-    <file src="TinyProfiler.cs" target="content\net35\TinyProfiler" />
-    <file src="TinyProfiler.cs" target="content\net40\TinyProfiler" />
+    <file src="..\TinyProfiler.cs" target="content\net35\TinyProfiler" />
+    <file src="..\TinyProfiler.cs" target="content\net40\TinyProfiler" />
+    <file src="readme.txt" target="" />
   </files>
 </package>

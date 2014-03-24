@@ -50,7 +50,7 @@ namespace TinyProfiler
         /// <param name="args">Arguments (used with string.Format() and <paramref name="nameFormat"/>).</param>
         /// <returns>Root profiler</returns>
         IProfiler StartProfiling(string nameFormat, params object[] args);
-    } 
+    }
     #endregion
 
     #region Optional implementation provided
@@ -89,12 +89,12 @@ namespace TinyProfiler
 
         public void Discard()
         {
-            
+
         }
 
         public void Dispose()
         {
-            
+
         }
     }
 
@@ -109,6 +109,8 @@ namespace TinyProfiler
         /// Null if child profiler.
         /// </summary>
         private readonly ILogger _logger = null;
+
+        private static readonly char[] _trimLineBreak = { '\r', '\n', ' ' };
 
         private readonly string _name;
 
@@ -165,21 +167,21 @@ namespace TinyProfiler
         }
         #endregion
 
-        private void WriteTimes(ILogger logger, int depth)
+        private void WriteTimes(System.IO.TextWriter writer, int depth)
         {
             const string format = "-{0} :\t{1} ms{2}";
             const string format2 = "-{0} :\t{1} ms (+{2})";
             if (depth == 1)
-                logger.Info(format.PadLeft(format.Length + depth * 2), _name, _watchStop, _watchCount != 0 ? " (+" + _watchCount + ")" : string.Empty);
+                writer.WriteLine(format.PadLeft(format.Length + depth * 2), _name, _watchStop, _watchCount != 0 ? " (+" + _watchCount + ")" : string.Empty);
             else
-                logger.Info(format2.PadLeft(format2.Length + depth * 2), _name, _watchStop, _watchCount);
+                writer.WriteLine(format2.PadLeft(format2.Length + depth * 2), _name, _watchStop, _watchCount);
             Profiler[] children;
             lock (_childrenSync)
             {
                 children = _children.ToArray();
             }
             foreach (var child in children)
-                child.WriteTimes(logger, depth + 1);
+                child.WriteTimes(writer, depth + 1);
         }
 
         #region IProfiler
@@ -246,14 +248,19 @@ namespace TinyProfiler
                     {
                         children = _children.ToArray();
                     }
-                    _logger.Info("{0} :\t{1} ms", _name, _watchStop);
-                    foreach (var child in children)
-                        child.WriteTimes(_logger, 1);
+                    using (var writer = new System.IO.StringWriter())
+                    {
+                        writer.WriteLine("{0} :\t{1} ms", _name, _watchStop);
+                        foreach (var child in children)
+                            child.WriteTimes(writer, 1);
 
-                    _watch.Stop();
-                    var measureOutputTime = _watch.ElapsedMilliseconds - _watchStop;
-                    if (measureOutputTime != 0)
-                        _logger.Debug("Measure overhead: {0} ms", measureOutputTime);
+                        _watch.Stop();
+                        var measureOutputTime = _watch.ElapsedMilliseconds - _watchStop;
+                        if (measureOutputTime != 0)
+                            writer.WriteLine("Measure overhead: {0} ms", measureOutputTime);
+
+                        _logger.Info(writer.ToString().TrimEnd(_trimLineBreak));
+                    }
                 }
             }
         }
@@ -369,6 +376,6 @@ namespace TinyProfiler
             _threadRootProfilerSet = false;
             _threadRootProfiler = null;
         }
-    } 
+    }
     #endregion
 }

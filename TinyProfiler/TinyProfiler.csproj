@@ -42,7 +42,10 @@
     <Compile Include="TinyProfiler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TinyProfiler.nuspec" />
+    <None Include="Nuget\TinyProfiler.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Nuget\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
