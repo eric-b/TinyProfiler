@@ -137,6 +137,8 @@ packages/
 
 # NDepend
 NDependOut/
+*.ndproj
+*.sln.ide
 
 
 # Windows Azure Build Output
